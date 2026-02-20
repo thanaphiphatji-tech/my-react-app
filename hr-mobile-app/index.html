@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- Mobile & App-like -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#111827" />
+
+    <title>HR Mobile App</title>
+
+    <!-- Google Font : Noto Sans Thai -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Tailwind CSS (CDN Mode) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: '#46bdc6',
+              bg: '#111827',
+              secondary: '#4A2C6D',
+              danger: '#D32F2F',
+              warning: '#F57C00',
+              yellow: '#FBC02D',
+              info: '#0288D1'
+            },
+            fontFamily: {
+              thai: ['Noto Sans Thai', 'sans-serif']
+            }
+          }
+        }
+      };
+    </script>
+
+    <!-- Disable text selection (optional for app feel) -->
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: 'Noto Sans Thai', sans-serif;
+        background-color: #111827;
+        color: #ffffff;
+        overscroll-behavior: none;
+      }
+
+      /* Hide scrollbar */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    </style>
+  </head>
+
+  <body class="bg-bg text-white antialiased">
+    <!-- React Mount Point -->
+    <div id="root" class="h-screen w-screen overflow-hidden"></div>
+
+    <!-- Vite Entry -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
