@@ -1,4 +1,11 @@
-const BASE_URL = '/gas';
+const BASE_URL =
+  import.meta.env.DEV
+    ? '/gas'
+<<<<<<< HEAD
+    : 'https://script.google.com/macros/s/AKfycby1YzD0g7VJq-NPMfulSu6re6Ikwh7HeU3uwl_OAIWXCadHvtAzT8oork-KJbwCdFvKmA/exec';
+=======
+    : 'https://script.google.com/macros/s/AKfycbwxTqnfz7jgmLS2ths4yY5eNgY0KSczrA1YZGXj_ErcSlCldxdBvN4jmRSlEn8Fb9U/exec';
+>>>>>>> 7aff341 (update entry page and routing)
 
 /* GET */
 export async function apiGet(path, params = {}) {
@@ -21,12 +28,12 @@ export async function apiGet(path, params = {}) {
 /* POST */
 export async function apiPost(path, body = {}) {
 
+  const formData = new URLSearchParams();
+  formData.append('payload', JSON.stringify(body));
+
   const res = await fetch(`${BASE_URL}?path=${path}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(body)
+    body: formData
   });
 
   const json = await res.json();

@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import react from '@vitejs/plugin-react-swc'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/my-react-app/',   // 👈 สำคัญมากสำหรับ GitHub Pages
+  base: '/',   // 👈 สำคัญมากสำหรับ GitHub Pages
 
   server: {
     port: 5173,
@@ -15,7 +15,7 @@ export default defineConfig({
         rewrite: (path) =>
           path.replace(
             /^\/gas/,
-            '/macros/s/AKfycby1YzD0g7VJq-NPMfulSu6re6Ikwh7HeU3uwl_OAIWXCadHvtAzT8oork-KJbwCdFvKmA/exec'
+            '/macros/s/AKfycbyEX2_dopaayoa10XBwG1zqxI0_GOsWeLTNIML8O5TqlLPNHmBfuKC0GfSHEOzPylQ82g/exec'
           )
       }
     }

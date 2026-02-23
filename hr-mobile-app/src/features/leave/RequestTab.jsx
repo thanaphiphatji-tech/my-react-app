@@ -21,11 +21,15 @@ const RequestTab = ({ employeeData, onRefresh }) => {
 
 
     useEffect(() => {
-        if (!employeeData?.employeeId) return
-        loadRequests()
-        loadQuota()
-        loadEmployeeNames()
-    }, [leaveRequests.length])
+    if (!employeeData?.employeeId) return
+    loadRequests()
+    loadQuota()
+    }, [employeeData?.employeeId])
+
+    useEffect(() => {
+    if (!leaveRequests.length) return
+    loadEmployeeNames()
+    }, [leaveRequests])
 
     if (!employeeData) return null
 
@@ -46,11 +50,13 @@ const RequestTab = ({ employeeData, onRefresh }) => {
     }
 
     async function loadRequests() {
+        console.log("EMPLOYEE:", employeeData.employeeId)
+        console.log("MANAGER:", employeeData.managerId)
         try {
 
             const data = await fetchLeaveRequests({
-                employeeId: employeeData.employeeId,
-                managerId: employeeData.employeeId
+            employeeId: employeeData.employeeId,
+            managerId: employeeData.employeeId
             })
 
             console.log('leaveRequests response:', data)
@@ -169,7 +175,12 @@ async function loadEmployeeNames() {
             )
         }
 
-        return leaveRequests
+        if (activeTab === 'ALL') {
+            return leaveRequests.filter(
+            r => r.employeeId === employeeData.employeeId ||
+            r.managerId === employeeData.employeeId
+            )
+        }
     }
 
     /* =========================
@@ -467,7 +478,7 @@ function RequestCard({ req }) {
 
 
 function LeaveModal({ onClose, employeeData, onSuccess }) {
-    const [leaveType, setLeaveType] = useState('ลาพักร้อน')
+    const [leaveType, setLeaveType] = useState('Vacation')
     const [startDate, setStartDate] = useState('')
     const [endDate, setEndDate] = useState('')
     const [reason, setReason] = useState('')
@@ -570,9 +581,9 @@ function LeaveModal({ onClose, employeeData, onSuccess }) {
                         onChange={e => setLeaveType(e.target.value)}
                         className="w-full bg-gray-800 border border-gray-700 rounded-xl p-2 text-sm"
                     >
-                        <option>ลาพักร้อน</option>
-                        <option>ลาป่วย</option>
-                        <option>ลากิจ</option>
+                        <option value="Vacation">ลาพักร้อน</option>
+                        <option value="Sick">ลาป่วย</option>
+                        <option value="Personal">ลากิจ</option>
                     </select>
                 </div>
 
